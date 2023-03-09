@@ -1,4 +1,4 @@
-# Jeedom-Creality_Cloud
+# Jeedom-IotaWatt
 
 Plugin to retrieve informations from IotaWatt box.
 
