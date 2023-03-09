@@ -1,0 +1,33 @@
+.eqLogicThumbnailDisplay .eqLogicThumbnailContainer .fas.fa-sign-in-alt.fa-rotate-90 {
+    font-size: 38px !important;
+    color: #ea1b39;
+}
+
+.fas.fa-question-circle.tooltips.tooltipstered {
+    color: var(--al-info-color) !important;
+}
+
+.eqLogicDisplayCard.cursor:hover {
+   opacity:.65 !important;
+}
+
+.eqLogicDisplayCard.cursor .status-circle {
+   font-size:1em !important;
+   position:absolute;
+   margin-top:35px;
+   margin-left:55px;
+}
+
+
+.eqLogicThumbnailDisplay .panel-title {
+   background-color: #ff9e18;
+   border-radius: 10px;
+}
+
+.logoPrimaryCreality {
+   color: #ff9e18;
+}
+
+.logoTrashCreality[data-action2=all] {
+   color: var(--al-danger-color);
+}
