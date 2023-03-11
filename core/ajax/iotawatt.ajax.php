@@ -31,8 +31,8 @@ try {
         ajax::success($result);
     }
 
-    if (init('action') == 'synchronize') {
-        $result = iotawatt::synchronize();
+    if (init('action') == 'getUnite') {
+        $result = iotawatt::getParamUnits(init('unit'), 'all');
         ajax::success($result);
     }
   

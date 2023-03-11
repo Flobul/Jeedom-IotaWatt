@@ -31,3 +31,11 @@
 .logoTrashCreality[data-action2=all] {
    color: var(--al-danger-color);
 }
+
+#idTableEqLogicConfig .form-group {
+    line-height: 16px;
+}
+
+#idTableEqLogicConfig .form-group div {
+    height: 18px;
+}

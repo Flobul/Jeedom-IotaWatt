@@ -61,4 +61,16 @@ class iotawatt_display extends eqLogic
         echo '        </div>';
         echo '    </div>';
     }
+  
+    public static function displayFormGroupEqLogic($datal2key, $type = null, $l1key = 'configuration', $unit = '')
+    {
+        $div = '<div class="form-group">';
+        $div .= '	<div class="col-sm-12">';
+        $div .= '		<label class="col-sm-4 control-label">' . $type . '</label>';
+        $div .= '		<span class="eqLogicAttr label label-info" data-l1key="' . $l1key . '" data-l2key="' . $datal2key . '" data-unit="' . $unit . '">';
+        $div .= '		</span>';
+        $div .= '	</div>';
+        $div .= '</div>';
+        echo $div;
+    }
 }

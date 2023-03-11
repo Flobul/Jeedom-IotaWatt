@@ -43,6 +43,7 @@ $('.eqLogicAttr[data-l1key="configuration"][data-l2key="group"]').on('change', f
   var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">'
   tr += '<td class="hidden-xs">'
   tr += '    <span class="cmdAttr" data-l1key="id" style="display:none;"></span>'
+  tr += '    <span class="cmdAttr" data-l1key="logicalId" style="display:none;"></span>'
   tr += '    <div class="input-group">'
   tr += '        <input class="cmdAttr form-control input-sm roundedLeft" data-l1key="name" placeholder="{{Nom de la commande}}">'
   tr += '        <span class="input-group-btn"><a class="cmdAction btn btn-sm btn-default" data-l1key="chooseIcon" title="{{Choisir une icône}}"><i class="fas fa-icons"></i></a></span>'
@@ -89,16 +90,16 @@ $('.eqLogicAttr[data-l1key="configuration"][data-l2key="group"]').on('change', f
   tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="valueType" title="{{Type de valeur}}">';
   tr += '        <option value="">{{Aucun}}</option>';
   tr += '        <optgroup label="{{Tension entrée ou sortie}}" id="group"></optgroup>';
-  tr += '        <option value="volts">{{Volts (V)}}</option>';
-  tr += '        <option value="hz">{{Hertz (Hz)}}</option>';
+  tr += '        <option value="Volts">{{Volts (V)}}</option>';
+  tr += '        <option value="Hz">{{Hertz (Hz)}}</option>';
   tr += '        <optgroup label="{{Puissance entrée ou sortie}}" id="group"></optgroup>';
-  tr += '        <option value="watts">{{Watts (W)}}</option>';
-  tr += '        <option value="amps">{{Ampères (A)}}</option>';
-  tr += '        <option value="wh">{{Watt-heure (Wh)}}</option>';
-  tr += '        <option value="va">{{Voltampère (VA)}}</option>';
-  tr += '        <option value="var">{{Voltampère réactif (VAr)}}</option>';
-  tr += '        <option value="varh">{{Voltampère-heure réactif (VAhr)}}</option>';
-  tr += '        <option value="pf">{{Facteur de puissance (cos phi)}}</option>';
+  tr += '        <option value="Watts">{{Watts (W)}}</option>';
+  tr += '        <option value="Amps">{{Ampères (A)}}</option>';
+  tr += '        <option value="Wh">{{Watt-heure (Wh)}}</option>';
+  tr += '        <option value="VA">{{Voltampère (VA)}}</option>';
+  tr += '        <option value="VAR">{{Voltampère réactif (VAr)}}</option>';
+  tr += '        <option value="VARh">{{Voltampère-heure réactif (VAhr)}}</option>';
+  tr += '        <option value="PF">{{Facteur de puissance (cos phi)}}</option>';
   tr += '    </select>';
   tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="round" title="{{Arrondi}}">';
   tr += '        <option value="0">0</option>';
@@ -152,24 +153,6 @@ $('.eqLogicAttr[data-l1key="configuration"][data-l2key="group"]').on('change', f
    $('#table_cmd tbody').append(tr);
    var tr = $('#table_cmd tbody tr').last();
 
-   /*jeedom.eqLogic.byId({
-     id:  $('.eqLogicAttr[data-l1key=id]').value(),
-     error: function (error) {
-       $('#div_alert').showAlert({message: error.message, level: 'danger'});
-     },
-     success: function (eqLogic) {
-       var result = '';
-       for (var i in eqLogic.configuration.series) {
-          if (eqLogic.configuration.channel == i) {
-              
-          }
-          result += '<option value="' + eqLogic.configuration.series[i].name + '">' + eqLogic.configuration.series[i].name +  ' > ' + eqLogic.configuration.series[i].unit + '</option>'
-       }
-       //tr.find('.cmdAttr[data-l1key=configuration][data-l2key=serie]').append(result);
-       //tr.setValues(_cmd, '.cmdAttr');
-     }
-   });*/
-
    jeedom.eqLogic.buildSelectCmd({
      id:  $('.eqLogicAttr[data-l1key=id]').value(),
      filter: {type: 'info'},
@@ -186,95 +169,46 @@ $('.eqLogicAttr[data-l1key="configuration"][data-l2key="group"]').on('change', f
    });
 }
 
-function printEqLogic(_eqLogic) {
+$(document).on("change",'.cmdAttr[data-l1key="configuration"][data-l2key="valueType"]',function(e) {
+    if (e.isTrigger === undefined) {
+        var value = $(this).val();
+        var trUnit = $(this).parents('tr.cmd').find('.cmdAttr[data-l1key="unite"]');
+        var trSerie = $(this).parents('tr.cmd').find('.cmdAttr[data-l1key="configuration"][data-l2key="serie"]');
+        var trDecimal = $(this).parents('tr.cmd').find('.cmdAttr[data-l1key="configuration"][data-l2key="round"]');
 
-       for (var i in _eqLogic.cmd) {
-          
-          console.log(_eqLogic.cmd[i].configuration.serie + '(' + _eqLogic.cmd[i].configuration.valueType + ')')
-       }
-    //$('#table_infoseqlogic tbody').empty();
-
-    //affichage des configurations du device
-    printEqLogicConfig("{{Nom}}", "name", _eqLogic);
-    printEqLogicConfig("{{Décalage fuseau horaire}}", "timediff", _eqLogic);
-    printEqLogicConfig("{{Version des mises à jour}}", "update", _eqLogic);
-    printEqLogicConfig("{{Version du firmware}}", "firmwareVersion", _eqLogic);
-    printEqLogicConfig("{{Adresse MAC}}", "mac", _eqLogic);
-    printEqLogicConfig("{{SSID}}", "SSID", _eqLogic);
-    printEqLogicConfig("{{Mot de passe admin}}", "admin", _eqLogic);
-    printEqLogicConfig("{{Mot de passe utilisateur}}", "user", _eqLogic);
-    printEqLogicConfig("{{Mot de passe accès local}}", "localAccess", _eqLogic);
-    printEqLogicConfig("{{Temps de connexion}}", "connecttime", _eqLogic);
-    printEqLogicConfig("{{Date de dernière communications}}", "lastUpdateTime", _eqLogic);
-    printEqLogicConfig("{{Date de démarrage}}", "startTime", _eqLogic);
-    printEqLogicConfig("{{Temps démarré}}", "runSeconds", _eqLogic);
-    printEqLogicConfig("{{Nombre d'entrées}}", "nbInputs", _eqLogic);
-    printEqLogicConfig("{{Nombre de sorties}}", "nbOutputs", _eqLogic);
-
-  
-    printEqLogicStatus("{{RSSI}}", "RSSI", _eqLogic);
-    printEqLogicStatus("{{Batterie faible}}", "lowbat", _eqLogic);
-    printEqLogicStatus("{{Date de dernière production}}", "lastProduction", _eqLogic);
-    printEqLogicStatus("{{Date de dernière connexion}}", "lastAlive", _eqLogic);
-    printEqLogicStatus("{{Date de création}}", "createdAt", _eqLogic);
-
-}
-
-function printEqLogicConfig(_label, _name, _eqLogic) {
-    if (isset(_eqLogic.result)) {
-        var eqLogic = _eqLogic.result;
-    } else {
-        var eqLogic = _eqLogic;
-    }
-    if (isset(eqLogic.configuration[_name])) {
-        if (eqLogic.configuration[_name] !== undefined) {
-            var trm = '<tr>';
-            trm += '	<td class="col-sm-5">';
-            trm += '		<span style="font-size : 1em;">' + _label + '</span>';
-            trm += '	</td>';
-            trm += '	<td>';
-            trm += '		<span class="label label-default" style="font-size:1em;white-space:unset !important">';
-            trm += '			<span class="eqLogicAttr" data-l1key="configuration" data-l2key="' + _name + '">';
-            if (typeof(eqLogic.configuration[_name]) === 'object') {
-                for (const [key, value] of Object.entries(eqLogic.configuration[_name])) {
-            trm += '			<span class="eqLogicAttr" data-l1key="configuration" data-l2key="' + _name + '" data-l3key="' + key + '"></span>';
+        $.ajax({
+          async: true,
+          type: "POST",
+          url: "plugins/iotawatt/core/ajax/iotawatt.ajax.php",
+          data: {
+              action: 'getUnite',
+              unit: value
+          },
+          dataType: 'json',
+          global: false,
+          error: function(request, status, error) {
+            handleAjaxError(request, status, error);
+          },
+          success: function(data) {
+            if (data.state != 'ok') {
+              $('#div_alert').showAlert({
+                message: data.result,
+                level: 'danger'
+              });
+              return;
+            }
+            if (data.result) {
+                if (data.result.unit && data.result.unit != trUnit.value()) {
+                    trUnit.value(data.result.unit);
+                }
+                if (data.result.decimals && data.result.decimals != trDecimal.value()) {
+                    trDecimal.value(data.result.decimals);
                 }
             }
-            trm += '			</span>';
-            trm += '		</span>';
-            trm += '	</td>';
-            trm += '</tr>';
-            $('#table_infoseqlogic tbody').append(trm);
-            $('#table_infoseqlogic tbody tr:last').setValues(eqLogic, '.eqLogicAttr');
-        }
+          }
+        });        
     }
-}
-
-function printEqLogicStatus(_label, _name, _eqLogic) {
-
-    if (isset(_eqLogic.result)) {
-        var eqLogic = _eqLogic.result;
-    } else {
-        var eqLogic = _eqLogic;
-    }
-    if (isset(eqLogic.status[_name])) {
-        if (eqLogic.status[_name] !== undefined) {
-            var trm = '<tr>';
-            trm += '	<td class="col-sm-5">';
-            trm += '		<span style="font-size : 1em;">' + _label + '</span>';
-            trm += '	</td>';
-            trm += '	<td>';
-            trm += '		<span class="label label-default" style="font-size:1em;white-space:unset !important">';
-            trm += '			<span class="eqLogicAttr" data-l1key="status" data-l2key="' + _name + '">';
-            trm += '			</span>';
-            trm += '		</span>';
-            trm += '	</td>';
-            trm += '</tr>';
-            $('#table_infoseqlogic tbody').append(trm);
-            $('#table_infoseqlogic tbody tr:last').setValues(eqLogic, '.eqLogicAttr');
-        }
-    }
-}
+});
 
 $('.cmdAction[data-action=addCommand]').on('click', function() {
     $('#md_modal').dialog({

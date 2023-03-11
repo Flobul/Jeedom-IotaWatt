@@ -76,16 +76,16 @@ log::add('iotawatt', 'debug', __('TESTADDCOMMAND2 : ', __FILE__) . json_encode($
                   <select id="voltPower">
                     <option value="">{{Aucun}}</option>
                     <optgroup label="{{Tension entrée ou sortie}}" id="group"></optgroup>
-                    <option value="volts">{{Tension (V)}}</option>
-                    <option value="hs">{{Fréquence (Hz)}}</option>
+                    <option value="Volts">{{Tension (V)}}</option>
+                    <option value="Hz">{{Fréquence (Hz)}}</option>
                     <optgroup label="{{Puissance entrée ou sortie}}" id="group"></optgroup>
-                    <option value="watts">{{Puissance (W)}}</option>
-                    <option value="amps">{{Intensité (A)}}</option>
-                    <option value="wh">{{Consommation (Wh)}}</option>
-                    <option value="va">{{Puissance active (VA)}}</option>
-                    <option value="var">{{Puissance réactive (VAr)}}</option>
-                    <option value="varh">{{Énergie réactive (VAhr)}}</option>
-                    <option value="pf">{{Facteur de puissance (cos phi)}}</option>
+                    <option value="Watts">{{Puissance (W)}}</option>
+                    <option value="Amps">{{Intensité (A)}}</option>
+                    <option value="Wh">{{Consommation (Wh)}}</option>
+                    <option value="VA">{{Puissance active (VA)}}</option>
+                    <option value="VAR">{{Puissance réactive (VAr)}}</option>
+                    <option value="VARh">{{Énergie réactive (VAhr)}}</option>
+                    <option value="PF">{{Facteur de puissance (cos phi)}}</option>
                   </select>
                 </div>
               </div>
@@ -123,26 +123,26 @@ $('#bt_cmdCreateSave').off().on('click',function() {
     var type = $('#series_id option:selected').data('type');
     var channel = $('#series_id option:selected').data('channel');                  
     const units = {
-      volts: "{{V}}",
-      hz: "{{Hz}}",
-      watts: "{{W}}",
-      amps: "{{A}}",
-      wh: "{{Wh}}",
-      va: "{{VA}}",
-      var: "{{VAr}}",
-      varh: "VAhr}}",
-      pf: "%"
+      Volts: "{{V}}",
+      Hz: "{{Hz}}",
+      Watts: "{{W}}",
+      Amps: "{{A}}",
+      Wh: "{{Wh}}",
+      VA: "{{VA}}",
+      VAR: "{{VAr}}",
+      VARh: "{{VAhr}}",
+      PF: "%"
     };
     const units_name = {
-      volts: "{{Tension}}",
-      hz: "{{Fréquence}}",
-      watts: "{{Puissance}}",
-      amps: "{{Intensité}}",
-      wh: "{{Consommation}}",
-      va: "{{Puissance active}}",
-      var: "{{Puissance réactive}}",
-      varh: "{{Énergie réactive}}",
-      pf: "{{Facteur de puissance}}"
+      Volts: "{{Tension}}",
+      Hz: "{{Fréquence}}",
+      Watts: "{{Puissance}}",
+      Amps: "{{Intensité}}",
+      Wh: "{{Consommation}}",
+      VA: "{{Puissance active}}",
+      VAR: "{{Puissance réactive}}",
+      VARh: "{{Énergie réactive}}",
+      PF: "{{Facteur de puissance}}"
     }
 
 	if(series == '' || voltpower == '' || roundValue == ''){

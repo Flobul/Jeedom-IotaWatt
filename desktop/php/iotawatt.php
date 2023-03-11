@@ -213,15 +213,27 @@ $eqLogics = eqLogic::byType($plugin->getId());
           <form class="form-horizontal">
             <legend><i class="fas fa-info-circle icon_yellow"></i> {{Informations}}</legend>
             <fieldset>
-              <div class="form-group">
-                <table id="table_infoseqlogic" class="col-sm-9 table-bordered table-condensed" style="border-radius: 10px;">
-                  <thead>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-                </br>
-              </div>
+			    <div id="idTableEqLogicConfig">
+			        <?php
+			            iotawatt_display::displayFormGroupEqLogic('mac','{{Adresse MAC}}');
+			            iotawatt_display::displayFormGroupEqLogic('name','{{Nom}}');
+			            iotawatt_display::displayFormGroupEqLogic('timediff','{{Décalage fuseau horaire }}');
+			            iotawatt_display::displayFormGroupEqLogic('update','{{Version des mises à jour}}');
+			            iotawatt_display::displayFormGroupEqLogic('lastUpdateTime','{{Date de de dernière actualisation}}');
+			            iotawatt_display::displayFormGroupEqLogic('startTime','{{Date de démarrage}}');
+			            iotawatt_display::displayFormGroupEqLogic('runSeconds','{{Temps démarré}}');
+			            iotawatt_display::displayFormGroupEqLogic('firmwareVersion','{{Version du firmware}}');
+			            iotawatt_display::displayFormGroupEqLogic('admin','{{Mot de passe admin}}');
+			            iotawatt_display::displayFormGroupEqLogic('user','{{Mot de passe utilisateur}}');
+			            iotawatt_display::displayFormGroupEqLogic('localAccess','{{Mot de passe accès local}}');
+			            iotawatt_display::displayFormGroupEqLogic('nbInputs','{{Nombre d\'entrées}}');
+			            iotawatt_display::displayFormGroupEqLogic('nbOutputs','{{Nombre de sorties}}');
+			            iotawatt_display::displayFormGroupEqLogic('connecttime','{{Temps de connexion Wi-Fi}}', 'status');
+			            iotawatt_display::displayFormGroupEqLogic('SSID','{{SSID}}');
+			            iotawatt_display::displayFormGroupEqLogic('RSSI','{{RSSI}}', 'status');
+			            iotawatt_display::displayFormGroupEqLogic('lowbat','{{Batterie faible}}', 'status');
+			        ?>
+			    </div>
               <div class="form-group">
                 <div class="col-sm-10">
                   <center>
