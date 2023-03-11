@@ -26,11 +26,6 @@ try {
 
 	ajax::init();
 
-    if (init('action') == 'getCredentials') {
-        $result = iotawatt::synchronize();
-        ajax::success($result);
-    }
-
     if (init('action') == 'getUnite') {
         $result = iotawatt::getParamUnits(init('unit'), 'all');
         ajax::success($result);

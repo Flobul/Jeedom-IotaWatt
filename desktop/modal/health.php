@@ -32,11 +32,10 @@ $eqLogics = iotawatt::byType('iotawatt');
 		<tr>
 			<th>{{Appareil}}</th>
 			<th>{{Id}}</th>
-			<th>{{Puissance max}}</th>
+			<th>{{Entrées/Sorties}}</th>
 			<th>{{RSSI}}</th>
-			<th>{{Dernière production}}</th>
-			<th>{{Dernière activité}}</th>
-			<th>{{Dernière communication}}</th>
+			<th>{{Date de de dernière actualisation}}</th>
+			<th>{{Temps démarré}}</th>
 			<th>{{Date d'ajout}}</th>
 			<th>{{Date création}}</th>
 		</tr>
@@ -47,37 +46,23 @@ $eqLogics = iotawatt::byType('iotawatt');
         foreach ($eqLogics as $eqLogic) {
           echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 
-          echo '<td>' . $eqLogic->getLogicalId() . '</td>';
+          echo '<td>' . $eqLogic->getConfiguration('name') . '</td>';
 
-          echo '<td><span class="label label-success" style="font-size : 1em; cursor : default;">'.$eqLogic->getConfiguration('power', 'N/A').' W</span></td>';
+          echo '<td><span class="label label-success" style="font-size : 1em; cursor : default;">'.$eqLogic->getConfiguration('nbInputs', 'N/A').'/'.$eqLogic->getConfiguration('nbOutputs', 'N/A').'</span></td>';
 
-          $rssi = $eqLogic->getStatus('lastDbm');
-          $couche = '<span class="label label-danger" style="font-size : 1em; cursor : default;">{{N/A}}</span>';
-          if (isset($rssi)) {
-              $couche = '<span class="label label-info" style="font-size : 1em; cursor : default;">' . $rssi . ' dBm</span>';
-          }
+          $rssi = $eqLogic->getStatus('RSSI');
+          $couche = isset($rssi) ? '<span class="label label-info" style="font-size : 1em; cursor : default;">' . $rssi . ' dBm</span>' : '<span class="label label-danger" style="font-size : 1em; cursor : default;">{{N/A}}</span>';
           echo '<td>' . $couche . '</td>';
 
-          $prod = $eqLogic->getStatus('lastProduction');
-          $lastProd = '<span class="label label-danger" style="font-size : 1em; cursor : default;">{{N/A}}</span>';
-          if (isset($prod)) {
-              $lastProd = '<span class="label label-info" style="font-size : 1em; cursor : default;">' . $prod . '</span>';
-          }
-          echo '<td>' . $lastProd . '</td>';
-          
-          $alive = $eqLogic->getStatus('lastAlive');
-          $lastAlive = '<span class="label label-danger" style="font-size : 1em; cursor : default;">{{N/A}}</span>';
-          if (isset($alive)) {
-              $lastAlive = '<span class="label label-info" style="font-size : 1em; cursor : default;">' . $alive . '</span>';
-          }
-          echo '<td>' . $lastAlive . '</td>';
+          $lastProd = $eqLogic->getStatus('lastValueUpdate');
+          $lastProd = $lastProd ? '<span class="label label-info" style="font-size: 1em; cursor: default;">' . date('Y-m-d H:i:s', $lastProd) . '</span>' : '<span class="label label-danger" style="font-size: 1em; cursor: default;">{{N/A}}</span>';
+          echo "<td>$lastProd</td>";
 
-          $created = $eqLogic->getStatus('createdAt');
-          $createdAt = '<span class="label label-danger" style="font-size : 1em; cursor : default;">{{N/A}}</span>';
-          if (isset($created)) {
-              $createdAt = '<span class="label label-info" style="font-size : 1em; cursor : default;">' . $created . '</span>';
-          }
-          echo '<td>' . $createdAt . '</td>';
+          $alive = $eqLogic->getConfiguration('runSeconds', 0);
+          [$hours, $minutes, $seconds] = array_map('floor', [$alive / 3600, ($alive % 3600) / 60, $alive % 60]);
+          $aliveString = sprintf('%02dh %02dmin %02ds', $hours, $minutes, $seconds);
+          $labelType = $alive ? 'label-info' : 'label-danger';
+          echo "<td><span class='label $labelType' style='font-size: 1em; cursor: default;'>$aliveString</span></td>";
 
           echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getStatus('lastCommunication') . '</span></td>';
           echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';

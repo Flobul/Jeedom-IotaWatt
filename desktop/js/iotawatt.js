@@ -60,12 +60,51 @@ $('.eqLogicAttr[data-l1key="configuration"][data-l2key="group"]').on('change', f
   tr += '</td>';
   
   tr += '<td>';
-  tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="type" title="{{Entrée/Sortie}}" disabled>';
-  tr += '        <option value="input">{{Entrée}}</option>';
-  tr += '        <option value="output">{{Sortie}}</option>';
-  tr += '    </select>';
-  if (init(_cmd.configuration.type) == 'input') {
-    tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="channel" title="{{Canal d\'entrée}}" disabled>';
+  if (init(_cmd.type) == 'info') {
+    tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="type" title="{{Entrée/Sortie}}" disabled>';
+    tr += '        <option value="input">{{Entrée}}</option>';
+    tr += '        <option value="output">{{Sortie}}</option>';
+    tr += '    </select>';
+    if (init(_cmd.configuration.type) == 'input') {
+      tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="channel" title="{{Canal d\'entrée}}" disabled>';
+      tr += '        <option value="0">0</option>';
+      tr += '        <option value="1">1</option>';
+      tr += '        <option value="2">2</option>';
+      tr += '        <option value="3">3</option>';
+      tr += '        <option value="4">4</option>';
+      tr += '        <option value="5">5</option>';
+      tr += '        <option value="6">6</option>';
+      tr += '        <option value="7">7</option>';
+      tr += '        <option value="8">8</option>';
+      tr += '        <option value="9">9</option>';
+      tr += '        <option value="10">10</option>';
+      tr += '        <option value="11">11</option>';
+      tr += '        <option value="12">12</option>';
+      tr += '        <option value="13">13</option>';
+      tr += '        <option value="14">14</option>';
+      tr += '    </select>';
+    }
+  }
+  tr += '</td>';
+
+  tr += '<td>';
+  if (init(_cmd.type) == 'info') {
+    tr += '    <span class="cmdAttr input-group-addon roundedLeft roundedRight" data-l1key="configuration" data-l2key="serie" style="font-size:15px;padding:0 5px 0 0!important;background:var(--btn-default-color) !important;" title="{{Nom de série}}" ></span>';
+    tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="valueType" title="{{Type de valeur}}">';
+    tr += '        <option value="">{{Aucun}}</option>';
+    tr += '        <optgroup label="{{Tension entrée ou sortie}}" id="group"></optgroup>';
+    tr += '        <option value="Volts">{{Volts (V)}}</option>';
+    tr += '        <option value="Hz">{{Hertz (Hz)}}</option>';
+    tr += '        <optgroup label="{{Puissance entrée ou sortie}}" id="group"></optgroup>';
+    tr += '        <option value="Watts">{{Watts (W)}}</option>';
+    tr += '        <option value="Amps">{{Ampères (A)}}</option>';
+    tr += '        <option value="Wh">{{Watt-heure (Wh)}}</option>';
+    tr += '        <option value="VA">{{Voltampère (VA)}}</option>';
+    tr += '        <option value="VAR">{{Voltampère réactif (VAr)}}</option>';
+    tr += '        <option value="VARh">{{Voltampère-heure réactif (VAhr)}}</option>';
+    tr += '        <option value="PF">{{Facteur de puissance (cos phi)}}</option>';
+    tr += '    </select>';
+    tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="round" title="{{Arrondi}}">';
     tr += '        <option value="0">0</option>';
     tr += '        <option value="1">1</option>';
     tr += '        <option value="2">2</option>';
@@ -76,43 +115,8 @@ $('.eqLogicAttr[data-l1key="configuration"][data-l2key="group"]').on('change', f
     tr += '        <option value="7">7</option>';
     tr += '        <option value="8">8</option>';
     tr += '        <option value="9">9</option>';
-    tr += '        <option value="10">10</option>';
-    tr += '        <option value="11">11</option>';
-    tr += '        <option value="12">12</option>';
-    tr += '        <option value="13">13</option>';
-    tr += '        <option value="14">14</option>';
     tr += '    </select>';
   }
-  tr += '</td>';
-
-  tr += '<td>';
-  tr += '    <span class="cmdAttr input-group-addon roundedLeft roundedRight" data-l1key="configuration" data-l2key="serie" style="font-size:15px;padding:0 5px 0 0!important;background:var(--btn-default-color) !important;" title="{{Nom de série}}" ></span>';
-  tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="valueType" title="{{Type de valeur}}">';
-  tr += '        <option value="">{{Aucun}}</option>';
-  tr += '        <optgroup label="{{Tension entrée ou sortie}}" id="group"></optgroup>';
-  tr += '        <option value="Volts">{{Volts (V)}}</option>';
-  tr += '        <option value="Hz">{{Hertz (Hz)}}</option>';
-  tr += '        <optgroup label="{{Puissance entrée ou sortie}}" id="group"></optgroup>';
-  tr += '        <option value="Watts">{{Watts (W)}}</option>';
-  tr += '        <option value="Amps">{{Ampères (A)}}</option>';
-  tr += '        <option value="Wh">{{Watt-heure (Wh)}}</option>';
-  tr += '        <option value="VA">{{Voltampère (VA)}}</option>';
-  tr += '        <option value="VAR">{{Voltampère réactif (VAr)}}</option>';
-  tr += '        <option value="VARh">{{Voltampère-heure réactif (VAhr)}}</option>';
-  tr += '        <option value="PF">{{Facteur de puissance (cos phi)}}</option>';
-  tr += '    </select>';
-  tr += '    <select class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="round" title="{{Arrondi}}">';
-  tr += '        <option value="0">0</option>';
-  tr += '        <option value="1">1</option>';
-  tr += '        <option value="2">2</option>';
-  tr += '        <option value="3">3</option>';
-  tr += '        <option value="4">4</option>';
-  tr += '        <option value="5">5</option>';
-  tr += '        <option value="6">6</option>';
-  tr += '        <option value="7">7</option>';
-  tr += '        <option value="8">8</option>';
-  tr += '        <option value="9">9</option>';
-  tr += '    </select>';
   tr += '</td>';
 
   tr += '<td>';
@@ -206,7 +210,7 @@ $(document).on("change",'.cmdAttr[data-l1key="configuration"][data-l2key="valueT
                 }
             }
           }
-        });        
+       });        
     }
 });
 
@@ -215,4 +219,11 @@ $('.cmdAction[data-action=addCommand]').on('click', function() {
         title: "{{Ajout de commande}}"
     });
     $('#md_modal').load('index.php?v=d&plugin=iotawatt&modal=addCommand&eqLogic_id='+$('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
+});
+
+$('#bt_healthiotawatt').off('click').on('click', function() {
+  $('#md_modal').dialog({
+    title: "{{Santé IotaWatt}}"
+  });
+  $('#md_modal').load('index.php?v=d&plugin=iotawatt&modal=health').dialog('open');
 });

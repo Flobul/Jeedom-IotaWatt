@@ -151,6 +151,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                   <input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="password">
                 </div>
               </div>
+
             </fieldset>
             <fieldset>
               <legend><i class="fas fa-cogs icon_orange"></i> {{Paramètres}}</legend>
@@ -218,10 +219,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			            iotawatt_display::displayFormGroupEqLogic('mac','{{Adresse MAC}}');
 			            iotawatt_display::displayFormGroupEqLogic('name','{{Nom}}');
 			            iotawatt_display::displayFormGroupEqLogic('timediff','{{Décalage fuseau horaire }}');
-			            iotawatt_display::displayFormGroupEqLogic('update','{{Version des mises à jour}}');
-			            iotawatt_display::displayFormGroupEqLogic('lastUpdateTime','{{Date de de dernière actualisation}}');
-			            iotawatt_display::displayFormGroupEqLogic('startTime','{{Date de démarrage}}');
-			            iotawatt_display::displayFormGroupEqLogic('runSeconds','{{Temps démarré}}');
 			            iotawatt_display::displayFormGroupEqLogic('firmwareVersion','{{Version du firmware}}');
 			            iotawatt_display::displayFormGroupEqLogic('admin','{{Mot de passe admin}}');
 			            iotawatt_display::displayFormGroupEqLogic('user','{{Mot de passe utilisateur}}');
@@ -232,6 +229,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			            iotawatt_display::displayFormGroupEqLogic('SSID','{{SSID}}');
 			            iotawatt_display::displayFormGroupEqLogic('RSSI','{{RSSI}}', 'status');
 			            iotawatt_display::displayFormGroupEqLogic('lowbat','{{Batterie faible}}', 'status');
+			            iotawatt_display::displayFormGroupEqLogic('update','{{Version des mises à jour}}');
+			            iotawatt_display::displayFormGroupEqLogic('lastUpdateTime','{{Date de de dernière mise à jour}}');
+			            iotawatt_display::displayFormGroupEqLogic('startTime','{{Date de démarrage}}');
+			            iotawatt_display::displayFormGroupEqLogic('runSeconds','{{Temps démarré}}');
+			            iotawatt_display::displayFormGroupEqLogic('lastValueUpdate','{{Date de de dernière actualisation}}','status', );
 			        ?>
 			    </div>
               <div class="form-group">
